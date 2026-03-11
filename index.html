@@ -582,7 +582,7 @@ function buildReceipt(){
   qrContainer.innerHTML='';
 
   var upiURL=upiVal
-    ? 'upi://pay?pa='+upiVal+'&pn='+encodeURIComponent(bizN)+'&am='+fmtNum(grand)+'&cu=INR&tn='+encodeURIComponent('Payment to '+bizN)
+    ? 'upi://pay?pa='+upiVal+'&pn='+encodeURIComponent(bizN)+'&am='+parseFloat(grand.toFixed(2))+'&cu=INR&tn='+encodeURIComponent('Payment to '+bizN)
     : '';
   window._upiURL=upiURL;
 
