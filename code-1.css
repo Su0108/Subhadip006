@@ -1,0 +1,524 @@
+  .bar-track span{font-family:var(--mono);font-size:13px;letter-spacing:.12em;display:inline-flex;gap:14px}
+  .bar-track svg{flex:none}
+
+  /* ---------- brew bar ---------- */
+  #brew .brew-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .steps{list-style:none;counter-reset:s;border-top:1px solid var(--line)}
+  .steps li{
+    counter-increment:s;display:grid;grid-template-columns:56px 1fr 90px;gap:16px;align-items:baseline;
+    padding:18px 8px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .2s;
+  }
+  .steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--accent)}
+  .steps li h4{font-size:19px;font-weight:600}
+  .steps li p{font-size:14px;color:var(--ink-soft)}
+  .steps li .t{font-family:var(--mono);font-size:13px;text-align:right;color:var(--ink-soft)}
+  .steps li:hover{background:rgba(36,24,18,.05)}
+  .steps li.active{background:var(--ink);color:var(--paper)}
+  .steps li.active p,.steps li.active .t{color:rgba(244,238,226,.7)}
+  .steps li.active::before{color:var(--paper)}
+
+  .timer{
+    border:1.5px solid var(--ink);border-radius:6px;padding:32px;position:sticky;top:96px;
+    box-shadow:6px 7px 0 rgba(36,24,18,.14);
+  }
+  .timer .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft)}
+  .timer .big{
+    font-family:var(--mono);font-size:clamp(4rem,7vw,6rem);font-weight:500;letter-spacing:-.02em;
+    line-height:1;margin:14px 0 8px;font-variant-numeric:tabular-nums;
+  }
+  .timer .big.running{color:var(--accent)}
+  .timer .ratio{font-family:var(--mono);font-size:13px;color:var(--ink-soft);margin-bottom:22px}
+  .ring{width:100%;height:auto;margin-bottom:20px}
+  .timer-ctl{display:flex;gap:12px}
+  .timer-ctl .btn{flex:1;text-align:center}
+  .pour-note{margin-top:18px;font-style:italic;font-size:15px;color:var(--ink-soft);min-height:1.5em}
+
+  /* ---------- visit ---------- */
+  #visit{padding-bottom:64px}
+  .visit-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px}
+  .hours{grid-column:1/6}
+  .hours table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px}
+  .hours td{padding:13px 4px;border-bottom:1px solid var(--line-soft)}
+  .hours td:last-child{text-align:right;color:var(--ink-soft)}
+  .hours tr.today td{color:var(--accent);font-weight:500}
+  .hours tr.today td::after{content:" · now";font-size:10px;letter-spacing:.1em}
+  .addr{grid-column:6/13}
+  .addr h3{font-size:clamp(1.6rem,2.6vw,2.2rem);font-weight:600;line-height:1.25;margin-bottom:20px}
+  .addr h3 em{font-style:italic;color:var(--accent)}
+  .addr-cols{display:flex;gap:48px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;color:var(--ink-soft);line-height:2}
+  .addr-cols b{display:block;color:var(--ink);text-transform:uppercase;letter-spacing:.12em;font-size:11px;margin-bottom:6px}
+
+  /* ---------- newsletter ---------- */
+  .news{
+    border:1.5px solid var(--ink);border-radius:6px;padding:56px 40px;margin:0 0 96px;
+    display:flex;gap:40px;align-items:center;flex-wrap:wrap;
+    box-shadow:6px 7px 0 rgba(36,24,18,.14);
+  }
+  .news h3{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:600;line-height:1.1;flex:1 1 320px}
+  .news h3 em{font-style:italic;color:var(--accent)}
+  .news form{flex:1 1 320px;display:flex;gap:12px}
+  .news input{
+    flex:1;border:1px solid var(--ink);background:transparent;padding:13px 16px;
+    font-family:var(--mono);font-size:13px;color:var(--ink);outline:none;min-width:0;
+  }
+  .news input:focus{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+  .news .msg{width:100%;font-family:var(--mono);font-size:12px;color:var(--accent);min-height:1.4em}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--ink);padding:40px 0 48px}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .foot .fm{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.06em;line-height:1.9}
+  .foot-links{display:flex;gap:24px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  .foot-links a{text-decoration:none;color:var(--ink-soft);transition:color .2s}
+  .foot-links a:hover{color:var(--accent)}
+
+  /* ---------- toast ---------- */
+  .toast{
+    position:fixed;left:50%;bottom:28px;transform:translate(-50%,80px);z-index:60;
+    background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+    padding:13px 22px;border-radius:4px;opacity:0;pointer-events:none;
+    transition:transform .35s cubic-bezier(.2,.9,.3,1.2),opacity .3s;
+  }
+  .toast.on{transform:translate(-50%,0);opacity:1}
+
+  /* ---------- reveal ---------- */
+  .rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .rv.in{opacity:1;transform:none}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:960px){
+    .hero-left,.hero-right{grid-column:1/13}
+    .hero-right{max-width:380px;padding-bottom:48px}
+    .dial-stage,.dial-read{grid-column:1/13}
+    .row{grid-template-columns:40px 1fr auto;grid-template-areas:"i h p" "i m m" "n n n"}
+    .row .idx{grid-area:i}.row h3{grid-area:h}.row .meta{grid-area:m}.row .price{grid-area:p}
+    .row .notes{grid-area:n;opacity:1;transform:none}
+    #brew .brew-grid{grid-template-columns:1fr;gap:40px}
+    .timer{position:static}
+    .hours,.addr{grid-column:1/13}
+    .nav-links a:not(.btn){display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="wrap nav">
+    <a href="#" class="wordmark">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9h12v6a6 6 0 0 1-6 6h0a6 6 0 0 1-6-6V9z"/><path d="M16 10h2a2.5 2.5 0 0 1 0 5h-2"/><path d="M8 5c0-1 .8-1.2.8-2M11.5 5c0-1 .8-1.2.8-2"/></svg>
+      KILN
+    </a>
+    <nav class="nav-links">
+      <a href="#roasts">Roasts</a>
+      <a href="#dial">Roast Lab</a>
+      <a href="#brew">Brew Guide</a>
+      <a href="#visit">Visit</a>
+      <a href="#visit" class="btn fill">Order beans</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" style="padding-bottom:0">
+  <div class="wrap hero-grid">
+    <div class="hero-left">
+      <p class="kicker">Small-batch roastery · Est. 2019 · Porto</p>
+      <h1>Coffee, roasted<br>to its <em>breaking point</em> —<br>never past it.</h1>
+      <p class="hero-sub">Twelve kilos at a time, on a 1962 drum roaster we rebuilt by hand. No blends hiding behind dark roast, no "premium" theatre. Just green coffee, fire, and a stubborn obsession with the first crack.</p>
+      <div class="hero-cta">
+        <a href="#roasts" class="btn fill">Shop the roasts</a>
+        <a href="#dial" class="btn">Try the roast dial</a>
+      </div>
+    </div>
+    <aside class="hero-right rv">
+      <div class="tag">
+        <div class="t-head">
+          <b>KILN · BATCH Nº 0412</b>
+          <b>250 g</b>
+        </div>
+        <dl>
+          <dt>Origin</dt><dd>Yirgacheffe, Ethiopia</dd>
+          <dt>Process</dt><dd>Washed</dd>
+          <dt>Roast</dt><dd>Light — City+</dd>
+          <dt>Agtron</dt><dd>62</dd>
+          <dt>Drop temp</dt><dd>204 °C</dd>
+        </dl>
+        <p class="taste">Apricot, bergamot, black tea. Lingering honey finish.</p>
+      </div>
+    </aside>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="mqTrack">
+      <span>First crack at 196 °C
+        <svg width="12" height="12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+        Roasted Tuesdays
+        <svg width="12" height="12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+        Shipped within 48 h
+        <svg width="12" height="12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+        Single origins only
+        <svg width="12" height="12" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ROASTS ================= -->
+<section id="roasts">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">The current roasts</h2>
+      <span class="sec-side">Batch Nº 0412 · roasted Tue 04 Jun</span>
+    </div>
+    <ul class="list rv">
+      <li class="row" style="--dot:#D9A05B">
+        <span class="idx">Nº01</span>
+        <h3><span class="dot"></span>Yirgacheffe Adado</h3>
+        <span class="meta">Ethiopia · Washed</span>
+        <span class="notes">Apricot, bergamot, black tea, honey finish</span>
+        <span class="price">€16 / 250 g</span>
+      </li>
+      <li class="row" style="--dot:#A66B3A">
+        <span class="idx">Nº02</span>
+        <h3><span class="dot"></span>Huila Pink Bourbon</h3>
+        <span class="meta">Colombia · Honey</span>
+        <span class="notes">Peach, red apple, cane sugar, silky body</span>
+        <span class="price">€18 / 250 g</span>
+      </li>
+      <li class="row" style="--dot:#6B4226">
+        <span class="idx">Nº03</span>
+        <h3><span class="dot"></span>Santa Clara Yellow</h3>
+        <span class="meta">Guatemala · Washed</span>
+        <span class="notes">Milk chocolate, hazelnut, orange peel</span>
+        <span class="price">€15 / 250 g</span>
+      </li>
+      <li class="row" style="--dot:#3E2A1C">
+        <span class="idx">Nº04</span>
+        <h3><span class="dot"></span>KILN Espresso</h3>
+        <span class="meta">Brazil + Sumatra · Blend</span>
+        <span class="notes">Cocoa nib, burnt caramel, heavy crema</span>
+        <span class="price">€14 / 250 g</span>
+      </li>
+      <li class="row" style="--dot:#B8551E">
+        <span class="idx">Nº05</span>
+        <h3><span class="dot"></span>Decaf Coatepec</h3>
+        <span class="meta">Mexico · EA Sugarcane</span>
+        <span class="notes">Brown sugar, plum, walnut — decaf that isn't sad</span>
+        <span class="price">€15 / 250 g</span>
+      </li>
+    </ul>
+    <p class="list-foot">↑ All roasts rest 5–10 days before shipping · whole bean or ground on request</p>
+  </div>
+</section>
+
+<!-- ================= ROAST DIAL ================= -->
+<section id="dial" style="border-top:1px solid var(--line);background:rgba(36,24,18,.035)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">The roast dial</h2>
+      <span class="sec-side">Interactive · drag the knob</span>
+    </div>
+    <div class="dial-grid">
+      <div class="dial-stage rv">
+        <div class="dial-box" id="dialBox" tabindex="0" role="slider"
+             aria-label="Roast level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35">
+          <svg class="dial-svg" id="dialSvg" viewBox="0 0 440 440">
+            <defs>
+              <radialGradient id="beanG" cx="35%" cy="30%" r="80%">
+                <stop id="beanHi" offset="0%" stop-color="#E8B878"/>
+                <stop id="beanLo" offset="100%" stop-color="#7A4A26"/>
+              </radialGradient>
+            </defs>
+            <!-- tick marks -->
+            <g id="ticks" stroke="#241812" stroke-opacity=".35"></g>
+            <!-- knob ring -->
+            <circle class="knob-ring" cx="220" cy="220" r="186" fill="none" stroke="#241812" stroke-width="1.5" stroke-dasharray="2 6"/>
+            <circle cx="220" cy="220" r="150" fill="none" stroke="#241812" stroke-width="1" stroke-opacity=".25"/>
+            <!-- rotating pointer -->
+            <g id="pointer">
+              <line x1="220" y1="52" x2="220" y2="86" stroke="#C1451A" stroke-width="4" stroke-linecap="round"/>
+            </g>
+            <!-- the bean -->
+            <g id="beanWrap">
+              <ellipse id="bean" cx="220" cy="228" rx="88" ry="64" fill="url(#beanG)" transform="rotate(-24 220 228)"/>
+              <path id="beanCrack" d="M185 190 Q212 228 196 266" fill="none" stroke="#241812" stroke-opacity=".55" stroke-width="7" stroke-linecap="round"/>
+              <!-- steam -->
+              <g id="steam" opacity="0">
+                <path d="M196 138 q10 -16 0 -32 q-10 -16 0 -32" fill="none" stroke="#71604F" stroke-width="2.5" stroke-linecap="round">
+                  <animate attributeName="opacity" values="0;.7;0" dur="2.6s" repeatCount="indefinite"/>
+                </path>
+                <path d="M232 132 q10 -16 0 -32 q-10 -16 0 -32" fill="none" stroke="#71604F" stroke-width="2.5" stroke-linecap="round">
+                  <animate attributeName="opacity" values="0;.7;0" dur="2.6s" begin="1.2s" repeatCount="indefinite"/>
+                </path>
+              </g>
+            </g>
+            <!-- center label -->
+            <text x="220" y="330" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" letter-spacing="3" fill="#71604F">AGTRON</text>
+            <text id="agtronTxt" x="220" y="362" text-anchor="middle" font-family="Fraunces" font-size="42" font-weight="600" fill="#241812">62</text>
+          </svg>
+        </div>
+        <p class="hint" style="text-align:center">← drag the knob, arrow keys, or mousewheel →</p>
+      </div>
+      <div class="dial-read readout rv">
+        <h2 id="roastName">City+</h2>
+        <p class="use" id="roastUse">Best for filter / pour-over</p>
+        <dl>
+          <div><dt>Agtron</dt><dd id="roAgtron">62</dd></div>
+          <div><dt>Drop temp</dt><dd id="roTemp">204 °C</dd></div>
+          <div><dt>Dev. time</dt><dd id="roDev">1:45</dd></div>
+          <div><dt>Body</dt><dd id="roBody">●●○○○</dd></div>
+          <div><dt>Acidity</dt><dd id="roAcid">●●●●○</dd></div>
+          <div><dt>Bitterness</dt><dd id="roBitter">●○○○○</dd></div>
+        </dl>
+        <p class="pick">Tastes like <b id="roTaste">apricot, bergamot and a whisper of honey</b>.</p>
+      </div>
+    </div>
+
+    <div class="stats rv">
+      <div class="stat"><b data-count="12">0</b><span>kg per batch</span></div>
+      <div class="stat"><b data-count="27">0</b><span>producer partners</span></div>
+      <div class="stat"><b data-count="1962">0</b><span>roaster birth year</span></div>
+      <div class="stat"><b data-count="5">0</b><span>cups in every QC</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BREW GUIDE ================= -->
+<section id="brew" style="border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">Brew like we do</h2>
+      <span class="sec-side">V60 · 15 g · 250 g water · 94 °C</span>
+    </div>
+    <div class="brew-grid">
+      <ol class="steps rv" id="steps">
+        <li data-t="0"   data-d="45"><div><h4>Bloom</h4><p>45 g water. Gently swirl. Let the coffee de-gas.</p></div><span class="t">0:00–0:45</span></li>
+        <li data-t="45"  data-d="40"><div><h4>First pour</h4><p>Pour to 100 g in slow spirals from the centre outward.</p></div><span class="t">0:45–1:25</span></li>
+        <li data-t="85"  data-d="45"><div><h4>Second pour</h4><p>Pour to 175 g. Keep the slurry level, avoid the walls.</p></div><span class="t">1:25–2:10</span></li>
+        <li data-t="130" data-d="50"><div><h4>Final pour</h4><p>Pour to 250 g. One gentle swirl to flatten the bed.</p></div><span class="t">2:10–3:00</span></li>
+        <li data-t="180" data-d="75"><div><h4>Drawdown</h4><p>Hands off. When drips stop, the bed should be flat and even.</p></div><span class="t">3:00–4:15</span></li>
+      </ol>
+      <div class="timer rv">
+        <span class="lbl">Brew timer</span>
+        <div class="big" id="tDisplay">00:00.0</div>
+        <div class="ratio">1 : 16.7 — 15 g coffee → 250 g water</div>
+        <svg class="ring" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="90" fill="none" stroke="#241812" stroke-opacity=".15" stroke-width="6"/>
+          <circle id="tRing" cx="100" cy="100" r="90" fill="none" stroke="#C1451A" stroke-width="6"
+                  stroke-linecap="round" stroke-dasharray="565.5" stroke-dashoffset="565.5"
+                  transform="rotate(-90 100 100)" style="transition:stroke-dashoffset .1s linear"/>
+          <text id="tPhase" x="100" y="108" text-anchor="middle" font-family="IBM Plex Mono" font-size="13" letter-spacing="2" fill="#71604F">READY</text>
+        </svg>
+        <div class="timer-ctl">
+          <button class="btn fill" id="tStart">Start</button>
+          <button class="btn" id="tReset">Reset</button>
+        </div>
+        <p class="pour-note" id="tNote">Press start when the water hits the coffee.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VISIT ================= -->
+<section id="visit">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">Visit the bar</h2>
+      <span class="sec-side">Rua das Flores 112 · Porto</span>
+    </div>
+    <div class="visit-grid">
+      <div class="hours rv">
+        <table>
+          <tr data-day="1"><td>Monday</td><td>closed</td></tr>
+          <tr data-day="2"><td>Tuesday</td><td>08:00 — 18:00</td></tr>
+          <tr data-day="3"><td>Wednesday</td><td>08:00 — 18:00</td></tr>
+          <tr data-day="4"><td>Thursday</td><td>08:00 — 18:00</td></tr>
+          <tr data-day="5"><td>Friday</td><td>08:00 — 20:00</td></tr>
+          <tr data-day="6"><td>Saturday</td><td>09:00 — 20:00</td></tr>
+          <tr data-day="0"><td>Sunday</td><td>09:00 — 16:00</td></tr>
+        </table>
+      </div>
+      <div class="addr rv">
+        <h3>Eight seats, one long oak bar, and a roaster you can <em>hear working</em> in the back.</h3>
+        <div class="addr-cols">
+          <div><b>Address</b>Rua das Flores 112<br>4050-262 Porto, Portugal</div>
+          <div><b>Contact</b>hello@kiln.coffee<br>+351 220 000 112</div>
+          <div><b>Good to know</b>Dogs welcome.<br>Cupping Saturdays, 10:00, free.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="news rv">
+      <h3>Green coffee lands Fridays.<br><em>Be the first to know.</em></h3>
+      <form id="newsForm" novalidate>
+        <input type="email" id="newsEmail" placeholder="your@email.com" aria-label="Email">
+        <button class="btn fill" type="submit">Subscribe</button>
+        <span class="msg" id="newsMsg"></span>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot">
+    <div class="fm">KILN Coffee Roasters · Porto<br>Roasted Tuesdays. Shipped within 48 hours.</div>
+    <nav class="foot-links">
+      <a href="#roasts">Roasts</a><a href="#brew">Brew</a><a href="#visit">Visit</a>
+      <a href="#" id="toTop">Back to top ↑</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const clamp = (v,a,b) => Math.min(b, Math.max(a, v));
+const lerp = (a,b,t) => a + (b-a)*t;
+
+function toast(msg){
+  const t = $('#toast'); t.textContent = msg; t.classList.add('on');
+  clearTimeout(t._h); t._h = setTimeout(()=>t.classList.remove('on'), 2600);
+}
+
+/* ---------- marquee: duplicate content for seamless loop ---------- */
+const mq = $('#mqTrack'); mq.innerHTML += mq.innerHTML;
+
+/* ---------- roast dial ---------- */
+const stages = [
+  { at:0,   name:'Green',       use:'Not coffee yet',           agtron:95, temp:'—',     dev:'—',    body:0, acid:5, bit:0, hi:'#C9DE9A', lo:'#7FA05A', taste:'grassy, raw and unmistakably a seed' },
+  { at:20,  name:'Cinnamon',    use:'Grass-trapped, avoid',     agtron:80, temp:'196 °C',dev:'1:05', body:1, acid:5, bit:1, hi:'#E8C98A', lo:'#B98A4E', taste:'grain, hay, a shy lemon edge' },
+  { at:40,  name:'City+',       use:'Best for filter',          agtron:62, temp:'204 °C',dev:'1:45', body:2, acid:4, bit:1, hi:'#F0C286', lo:'#9C5F2E', taste:'apricot, bergamot and a whisper of honey' },
+  { at:60,  name:'Full City',   use:'Filter or moka',           agtron:50, temp:'212 °C',dev:'2:10', body:3, acid:3, bit:2, hi:'#D8995C', lo:'#6E3C1C', taste:'caramelised sugar, orange peel, cocoa' },
+  { at:80,  name:'Vienna',      use:'Espresso country',         agtron:40, temp:'219 °C',dev:'2:40', body:4, acid:2, bit:3, hi:'#B6713C', lo:'#4A2410', taste:'dark chocolate, toasted nut, brown butter' },
+  { at:100, name:'French',      use:'Espresso, traditional',    agtron:28, temp:'226 °C',dev:'3:10', body:5, acid:1, bit:5, hi:'#8C5028', lo:'#2A130A', taste:'bittersweet cocoa, smoke, almost no acid' }
+];
+
+const dialBox = ('#dialBox'), svg =('#dialSvg'), pointer = $('#pointer');
+const bean = ('#bean'), beanHi =('#beanHi'), beanLo = $('#beanLo');
+const steam = ('#steam'), crack =('#beanCrack');
+
+/* tick marks */
+const ticks = $('#ticks');
+for(let i=0;i<=20;i++){
+  const a = -210 + i*21, r1 = 168, r2 = i%5===0 ? 180 : 176;
+  const rad = a*Math.PI/180;
+  const l = document.createElementNS('http://www.w3.org/2000/svg','line');
+  l.setAttribute('x1', 220+Math.sin(rad)*r1); l.setAttribute('y1', 220-Math.cos(rad)*r1);
+  l.setAttribute('x2', 220+Math.sin(rad)*r2); l.setAttribute('y2', 220-Math.cos(rad)*r2);
+  l.setAttribute('stroke-width', i%5===0?2:1);
+  ticks.appendChild(l);
+}
+
+let val = 40, dragging = false;
+
+function stageAt(v){
+  for(let i=stages.length-1;i>=0;i--) if(v >= stages[i].at) return [stages[i], stages[Math.min(i+1,stages.length-1)], i];
+  return [stages[0], stages[1], 0];
+}
+
+function render(){
+  const [s, s2, i] = stageAt(val);
+  const t = (s2.at===s.at) ? 0 : clamp((val-s.at)/(s2.at-s.at),0,1);
+
+  const ag  = Math.round(lerp(s.agtron, s2.agtron, t));
+  const bod = Math.round(lerp(s.body, s2.body, t));
+  const acd = Math.round(lerp(s.acid, s2.acid, t));
+  const bit = Math.round(lerp(s.bit, s2.bit, t));
+
+  // bean colour
+  beanHi.setAttribute('stop-color', s.hi); beanLo.setAttribute('stop-color', s.lo);
+  const squash = 1 - 0.10*t;             // beans expand then wrinkle slightly
+  bean.setAttribute('ry', 64*squash);
+  crack.setAttribute('stroke-opacity', 0.25 + 0.5*t);
+  steam.setAttribute('opacity', val>35 ? clamp((val-35)/30,0,1) : 0);
+
+  pointer.setAttribute('transform', `rotate(${-210 + val*4.2} 220 220)`);
+  $('#agtronTxt').textContent = ag;
+  dialBox.setAttribute('aria-valuenow', Math.round(val));
+
+  $('#roastName').textContent = t<.5 ? s.name : s2.name;
+  $('#roastUse').textContent  = t<.5 ? s.use  : s2.use;
+  $('#roAgtron').textContent  = ag;
+  $('#roTemp').textContent    = t<.5 ? s.temp : s2.temp;
+  $('#roDev').textContent     = t<.5 ? s.dev  : s2.dev;
+  $('#roTaste').textContent   = t<.5 ? s.taste: s2.taste;
+  $('#roBody').textContent    = '●'.repeat(bod)+'○'.repeat(5-bod);
+  $('#roAcid').textContent    = '●'.repeat(acd)+'○'.repeat(5-acd);
+  $('#roBitter').textContent  = '●'.repeat(bit)+'○'.repeat(5-bit);
+}
+
+function setVal(v){ val = clamp(v,0,100); render(); }
+
+/* pointer → value (210° sweep, from -210° to +210°) */
+function angleToVal(e){
+  const r = svg.getBoundingClientRect();
+  const cx = r.left + r.width/2, cy = r.top + r.height/2;
+  let a = Math.atan2(e.clientX-cx, cy-e.clientY) * 180/Math.PI; // 0 = up
+  return clamp((a+210)/4.2, 0, 100);
+}
+
+svg.addEventListener('pointerdown', e => { dragging=true; svg.setPointerCapture(e.pointerId); setVal(angleToVal(e)); });
+svg.addEventListener('pointermove', e => dragging && setVal(angleToVal(e)));
+svg.addEventListener('pointerup',   () => dragging=false);
+dialBox.addEventListener('wheel', e => { e.preventDefault(); setVal(val - Math.sign(e.deltaY)*3); }, {passive:false});
+dialBox.addEventListener('keydown', e => {
+  if(e.key==='ArrowLeft'||e.key==='ArrowDown'){ setVal(val-3); e.preventDefault(); }
+  if(e.key==='ArrowRight'||e.key==='ArrowUp'){ setVal(val+3); e.preventDefault(); }
+});
+
+/* toast on stage change */
+let lastStage = null;
+render();
+setInterval(()=>{
+  const name = $('#roastName').textContent;
+  if(lastStage && name!==lastStage) toast('Roast level: '+name);
+  lastStage = name;
+}, 300);
+
+/* ---------- animated counters ---------- */
+const io1 = new IntersectionObserver(es=>{
+  es.forEach(en=>{
+    if(!en.isIntersecting) return; io1.unobserve(en.target);
+    const el = en.target, end = +el.dataset.count, t0 = performance.now();
+    (function tick(now){
+      const p = Math.min((now-t0)/1400, 1), e = 1-Math.pow(1-p,3);
+      el.textContent = Math.round(end*e);
+      if(p<1) requestAnimationFrame(tick);
+    })(t0);
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>io1.observe(el));
+
+/* ---------- brew timer ---------- */
+const steps = [...document.querySelectorAll('#steps li')];
+const tDisp = ('#tDisplay'), tRing =('#tRing'), tPhase = ('#tPhase'), tNote =('#tNote');
+const TOTAL = 255; let t0=null, elapsed=0, raf=null, running=false;
+const CIRC = 565.5;
+const fmt = s => {
+  const m = Math.floor(s/60), sec = s%60;
+  return String(m).padStart(2,'0')+':'+String(Math.floor(sec)).padStart(2,'0')+'.'+Math.floor((sec%1)*10);
+};
+
+function paint(){
+  tDisp.textContent = fmt(elapsed);
+  tRing.style.strokeDashoffset = CIRC * (1 - elapsed/TOTAL);
+
+  let cur = null, next = null;
+  for(const st of steps){
+    const start = +st.dataset.t;
+    if(elapsed >= start) cur = st; else { next = st; break; }
+  }
+  steps.forEach(st => st.classList.toggle('active', st===cur && running));
+
+  if(!running && elapsed===0){
+    tPhase
+
+> ⚠️ The response reached the length limit. Reply **continue** to get the rest.
